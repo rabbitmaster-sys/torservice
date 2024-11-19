@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 RUN apk update && \
-    apk add --no-cache nodejs tor bash
+    apk add --no-cache nodejs npm tor bash
 WORKDIR /service
 COPY . /service
 RUN if [ -f "./package.json" ]; then npm install; fi
