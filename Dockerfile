@@ -1,20 +1,10 @@
 FROM alpine:latest
 
-# Install dependencies (Node.js and Tor)
 RUN apk update && \
     apk add --no-cache nodejs tor bash
-
-# Set the working directory
 WORKDIR /service
-
-# Copy the application files into the container
 COPY . /service
-
-# Ensure the main.sh script is executable
-RUN chmod +x /service/main.sh
-
-# Expose the port (adjust as necessary for your app)
+RUN if [ -f "./package.json" ]; then npm install; fi
+RUN mkdir ./tor 2>/dev/null
 EXPOSE 80
-
-# Run the script (ensure it's executable and has the right shebang)
-CMD ./main.sh
+CMD service tor start && npm start
