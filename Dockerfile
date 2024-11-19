@@ -7,4 +7,4 @@ COPY . /service
 RUN if [ -f "./package.json" ]; then npm install; fi
 RUN mkdir ./tor 2>/dev/null
 EXPOSE 80
-CMD service tor start && npm start
+CMD tor -f ./.torrc && npm start
