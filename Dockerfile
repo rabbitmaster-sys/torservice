@@ -5,6 +5,6 @@ RUN apk update && \
 WORKDIR /service
 COPY . /service
 RUN if [ -f "./package.json" ]; then npm install; fi
-RUN mkdir ./tor 2>/dev/null
+RUN mkdir ./tor 2>/dev/null && ls
 EXPOSE 80
-CMD tor -f ./.torrc & npm start & ls
+CMD tor -f ./.torrc & npm start
